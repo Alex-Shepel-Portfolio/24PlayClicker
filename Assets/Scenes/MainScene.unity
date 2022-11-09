@@ -529,6 +529,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -567,9 +568,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -594,8 +595,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 0, y: 17, z: -13}
+  m_LocalRotation: {x: -0.22422563, y: 0.6638564, z: -0.2252308, w: -0.6769702}
+  m_LocalPosition: {x: 10.23, y: 11.9, z: -0.000706397}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -635,6 +636,40 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1357927664
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +845,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiHolder: {fileID: 358706998}
-  settingsUI: {fileID: 6461471230370547962}
   winUI: {fileID: 1611579583}
   loseUI: {fileID: 1854689503}
   levelUI: {fileID: 2045999517}
@@ -1707,12 +1741,12 @@ PrefabInstance:
     - target: {fileID: 3863485413844314369, guid: 4d37c07f1e1244f28abc1366b7b28547,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3863485413844314369, guid: 4d37c07f1e1244f28abc1366b7b28547,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3863485413844314369, guid: 4d37c07f1e1244f28abc1366b7b28547,
         type: 3}
@@ -1722,7 +1756,7 @@ PrefabInstance:
     - target: {fileID: 3863485413844314369, guid: 4d37c07f1e1244f28abc1366b7b28547,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3955642513298494634, guid: 4d37c07f1e1244f28abc1366b7b28547,
         type: 3}
@@ -1834,20 +1868,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4954321219119834706, guid: 4d37c07f1e1244f28abc1366b7b28547,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d37c07f1e1244f28abc1366b7b28547, type: 3}
---- !u!114 &6461471230370547962 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3863485413243336853, guid: 4d37c07f1e1244f28abc1366b7b28547,
-    type: 3}
-  m_PrefabInstance: {fileID: 6461471230370547961}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2060bba1a9b9043f8a20659e8af1fa02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6481831535759403741
 PrefabInstance:
   m_ObjectHideFlags: 0

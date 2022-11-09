@@ -801,7 +801,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
     Android: MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED
-    Standalone: AIUNITY_CODE;CLOG_DEBUG
+    Standalone: AIUNITY_CODE;CLOG_DEBUG;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED
     iPhone: MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED
   additionalCompilerArguments: {}
   platformArchitecture: {}
