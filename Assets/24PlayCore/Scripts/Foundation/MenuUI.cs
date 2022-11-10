@@ -9,7 +9,8 @@ public class MenuUI : MonoSingleton<MenuUI>
     [SerializeField] private LoseUI loseUI;
     [SerializeField] private LevelUI levelUI;
     [SerializeField] private CoinsUI coinsUI;
-
+    [SerializeField] private LevelProgressBar levelProgressBar;
+    public LevelProgressBar LevelProgressBar => levelProgressBar;
     public GameObject UIHolder => uiHolder;
 
     private void Start()

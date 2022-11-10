@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2869b9b8c667b04419854bf6e5dd1dd0, type: 3}
+  m_Name: TextPresetsToWrite_v1
+  m_EditorClassIdentifier: 
+  TextsPreset:
+  - TextToWrite: '    public TextPreset GetRandomPreset() \n    {    \n     var textPreset
+      = TextsPreset.Shuffle(); \n        return textPreset[0];\n     }\n'
+    WriteSpeedOffset: 0
+  - TextToWrite: '[CreateAssetMenu(fileName="TextPresetsToWrite",menuName="CustomTools/Writer/TextPresetsToWrite",
+      order = 1)] public class'
+    WriteSpeedOffset: 0
+  - TextToWrite: public struct TextPreset \n{   \n  public string TextToWrite;  \n  
+      public float writeSpeedOffset;\n }\n
+    WriteSpeedOffset: 0
+  - TextToWrite: '   public void StartWriteText(TextPreset textPreset)    {      
+      if(writeTextCoroutine != null){return;}       writeTextCoroutine = Start'
+    WriteSpeedOffset: 0

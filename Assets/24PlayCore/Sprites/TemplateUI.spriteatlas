@@ -206,7 +206,7 @@ SpriteAtlas:
   - Exclamqtion_Mark
   - Tile_Yellow
   - Play
-  - Sound_Off
+  - Sound_off
   - Main_Button_4
   - Star_3
   - Diamond_3
