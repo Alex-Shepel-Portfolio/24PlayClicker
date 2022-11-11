@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class TimeScaleController : ImprovedMonoBehaviour
 {
     public event System.Action<float> OnTimeScaleChanged;
+    public event System.Action<float,float,float, float, float> OnRateOverTimeChanged;
     
     [Header("Click per second")]
     // max i could recieve in internet test is 7 cps
@@ -99,15 +100,18 @@ public class TimeScaleController : ImprovedMonoBehaviour
 
     private void SetParticles()
     {
+        float valueToSet = 0;
         if (currentCPS < minCPS)
         {
-            emission.rateOverTime = 0;
+            valueToSet = 0;
         }
         else
         {
-            emission.rateOverTime =
+            valueToSet =
                 Mathf.Lerp(minEmission, maxEmission,
                 Mathf.InverseLerp(minCPS, maxCPS, currentCPS));
         }  
+        emission.rateOverTime = valueToSet;
+        OnRateOverTimeChanged?.Invoke(minEmission,maxEmission, minCPS, maxCPS, currentCPS);
     }
 }

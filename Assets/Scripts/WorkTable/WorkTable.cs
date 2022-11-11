@@ -44,10 +44,11 @@ public class WorkTable : ImprovedMonoBehaviour
         OnWorkerStateChange += SendWorkerStatus;
         OnPlayerLook += SendPlayerLookStatus;
         timeScaleController.OnTimeScaleChanged += OnStartWorkFaster;
+        timeScaleController.OnRateOverTimeChanged += OnRateChange;
         computerController.SetWorker(worker);
         timeScaleController.SetParameters(worker.GetWorkerDamage());
     }
-    
+
     private void SendWorkerStatus(bool isHasWorker)
     {
         computerController.IsHasWorker(isHasWorker);
@@ -84,5 +85,9 @@ public class WorkTable : ImprovedMonoBehaviour
         var writeSpeed = workTime * worker.GetWorkerWriteSpeed();
         worker.ChangeAnimationSpeed(writeSpeed);
         computerController.UpdateWorkSpeed(writeSpeed);
+    }
+    private void OnRateChange(float totalMin, float totalMax,float min, float max,float currentValue)
+    {
+        computerController.SetRate(totalMin,totalMax,min,max,currentValue);
     }
 }

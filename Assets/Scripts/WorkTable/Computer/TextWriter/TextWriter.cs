@@ -31,8 +31,10 @@ public class TextWriter : ImprovedMonoBehaviour
 
    private TextPreset currentWritePreset;
 
-   
-   
+   public void SetRate(float min, float max,float currentValue)
+   {
+      textAtScreen.color = Color.Lerp(Color.green, Color.red, Mathf.InverseLerp(min, max, currentValue));
+   }
    public void UpdateWriteTime(float writeTime)
    {
       writeSpeed = writeTime;
@@ -52,6 +54,7 @@ public class TextWriter : ImprovedMonoBehaviour
     StopCoroutine(writeTextCoroutine);
     writeTextCoroutine = null;
    }
+
 
    private IEnumerator WriteTextCoroutine(string currentText, TextPreset textPreset, float workerSpeedWrite, bool isNeedSendBuild)
    {
@@ -132,6 +135,7 @@ public class TextWriter : ImprovedMonoBehaviour
       currentWritePreset = textPresetsToWrite.GetRandomPreset();
       return currentWritePreset;
    }
+   
 }
 
 [Serializable]

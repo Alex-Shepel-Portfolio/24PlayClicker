@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class ComputerController : ImprovedMonoBehaviour
 {
     [SerializeField] private TextWriter textWriter;
+    [SerializeField] private Transform computerHolder;
+    [SerializeField] private float shakeStrenges;
     private Worker worker;
     private bool isPlayerLook;
     public Action OnWorkDone;
@@ -26,6 +29,19 @@ public class ComputerController : ImprovedMonoBehaviour
     public void IsPlayerLook(bool isLook)
     {
         isPlayerLook = isLook;
+    }
+    public void SetRate(float totalMin, float totalMax,float min, float max,float currentValue)
+    {
+        var valueToSet = Mathf.Lerp(totalMin, totalMax,
+            Mathf.InverseLerp(min, max, currentValue));
+        textWriter.SetRate(min,max,currentValue);
+        if (currentValue < min)
+        {
+            computerHolder.DOKill();
+            computerHolder.DOLocalRotateQuaternion(Quaternion.identity, 0.5f);
+            return;
+        }
+        computerHolder.DOShakeRotation(0.3f, shakeStrenges, 2, valueToSet, false);
     }
 
     public void SetWorker(Worker worker)
@@ -67,4 +83,6 @@ public class ComputerController : ImprovedMonoBehaviour
     {
         textWriter.StopWriteText();
     }
+
+
 }
