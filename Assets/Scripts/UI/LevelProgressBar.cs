@@ -15,6 +15,9 @@ public class LevelProgressBar : ImprovedMonoBehaviour
    private void Start()
    {
       LevelProgressController.Instance.OnUpdate += SetNewParameters;
+      SetNewParameters(SLS.Data.Game.ProgressLevel.Value);
+      // SetProgressValue(LevelProgressController.Instance.GetPointerPerStage(),
+      //    LevelProgressController.Instance.GetPointerPerStage());
    }
    
    public void SetProgressValue(float currentValue, float targetValue)

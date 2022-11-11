@@ -9,7 +9,8 @@ public class TextPresetsToWrite : ScriptableObject
 
     public TextPreset GetRandomPreset()
     {
-        var textPreset = TextsPreset.Shuffle();
+        var textPreset = TextsPreset;
+        textPreset.Shuffle();
         return textPreset[0];
     }
 }

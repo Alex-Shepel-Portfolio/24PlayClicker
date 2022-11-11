@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: WorkerParameters_Corol
   m_EditorClassIdentifier: 
   WorkerID: 0
-  Damage: 10
-  WriteSpeed: 3
+  Damage: 1
+  WriteSpeed: 1
+  startCostValue:
+    WriteSpeed: 5
+    StressTolerance: 30
+    Damage: 5

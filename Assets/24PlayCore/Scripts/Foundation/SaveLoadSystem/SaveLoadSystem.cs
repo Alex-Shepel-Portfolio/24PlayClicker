@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using Newtonsoft.Json;
 
@@ -28,6 +29,11 @@ public class SaveLoadSystem : MonoSingleton<SaveLoadSystem>
     {
         base.Awake();
         LoadData();
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveData();
     }
 
     private void LoadData()

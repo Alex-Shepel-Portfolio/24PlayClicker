@@ -15,5 +15,11 @@ public class MaterialProperties
 
 public class GameResources
 {
+    public class UpgradesValue
+    {
+        public const int StartDamageCost = 25;
+        public const int StartStressTolerantCost = 25;
+        public const int StartWriteSpeedCost = 25;
+    }
 
 }

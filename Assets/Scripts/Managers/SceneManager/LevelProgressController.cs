@@ -56,6 +56,7 @@ public class LevelProgressController : MonoSingleton<LevelProgressController>
         };
         
         SLS.Data.Game.ProgressLevel.Value = LevelProgress;
+        SLS.Save();
         SendNeedUpgrade();
         OnUpdate?.Invoke(LevelProgress);
     }
@@ -73,6 +74,7 @@ public class LevelProgressController : MonoSingleton<LevelProgressController>
         };
         
         SLS.Data.Game.ProgressLevel.Value = LevelProgress;
+        SLS.Save();
         SendNeedUpgrade();
     }
     private void SendNeedUpgrade()

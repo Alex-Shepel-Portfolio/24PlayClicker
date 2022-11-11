@@ -31,22 +31,36 @@ public class ComputerController : ImprovedMonoBehaviour
     public void SetWorker(Worker worker)
     {
         this.worker = worker;
+        IsHasWorker(worker!=null);
     }
 
     public void IsHasWorker(bool isHasWorker)
     {
         if (isHasWorker)
         {
-            StartWork();
+            StartDefaultWork();
             return;
         }
 
         StopWork();
     }
-    
-    private void StartWork()
+
+    public void StartDefaultWork()
     {
-        textWriter.StartWriteText(worker.GetWorkerWriteSpeed());
+        StartWork(false);
+    }
+    public void StartLastWork()
+    {
+        StartWork(true);
+    }
+    public void StopWorks()
+    {
+        StopWork();
+    }
+    
+    private void StartWork(bool isLastWork)
+    {
+        textWriter.StartWriteText(worker.GetWorkerWriteSpeed(),isLastWork);
     }
     
     private void StopWork()

@@ -45,12 +45,9 @@ public class WorkTable : ImprovedMonoBehaviour
         OnPlayerLook += SendPlayerLookStatus;
         timeScaleController.OnTimeScaleChanged += OnStartWorkFaster;
         computerController.SetWorker(worker);
-        IsHasWorker = true;
-        IsPlayerLook = true;
         timeScaleController.SetParameters(worker.GetWorkerDamage());
-
     }
-
+    
     private void SendWorkerStatus(bool isHasWorker)
     {
         computerController.IsHasWorker(isHasWorker);
@@ -69,12 +66,23 @@ public class WorkTable : ImprovedMonoBehaviour
     {
        var workerDamage = worker.GetWorkerDamage();
         EventManager.SendWorkDone(workerDamage);
-        computerController.IsHasWorker(true);
+        SendNextStepToComputer();
+    }
+
+    private void SendNextStepToComputer()
+    {
+        if (SceneController.Instance.IsPreLastStage)
+        {
+            computerController.StartLastWork();
+            return;
+        }
+        computerController.StartDefaultWork();
     }
 
     private void OnStartWorkFaster(float workTime)
     {
         var writeSpeed = workTime * worker.GetWorkerWriteSpeed();
+        worker.ChangeAnimationSpeed(writeSpeed);
         computerController.UpdateWorkSpeed(writeSpeed);
     }
 }

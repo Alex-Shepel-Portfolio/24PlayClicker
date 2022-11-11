@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: TextPresetsToWrite_v1
   m_EditorClassIdentifier: 
   TextsPreset:
-  - TextToWrite: '    public TextPreset GetRandomPreset() \n    {    \n     var textPreset
-      = TextsPreset.Shuffle(); \n        return textPreset[0];\n     }\n'
+  - TextToWrite: '    public TextPreset GetRandomPreset()<br>n    {   <br>     var
+      textPreset = TextsPreset.Shuffle(); <br>      return textPreset[0];\n     }<br>'
     WriteSpeedOffset: 0
-  - TextToWrite: '[CreateAssetMenu(fileName="TextPresetsToWrite",menuName="CustomTools/Writer/TextPresetsToWrite",
-      order = 1)] public class'
+  - TextToWrite: 'init penis <br> init penuis_2 <br> init vagina <br> result_1 =
+      panis + penis_2 <br> result_2 = penis + vagina <br> result_1 >> George <br>result_2
+      >> bad '
     WriteSpeedOffset: 0
-  - TextToWrite: public struct TextPreset \n{   \n  public string TextToWrite;  \n  
-      public float writeSpeedOffset;\n }\n
+  - TextToWrite: public struct TextPreset <br>{  <br>  public string TextToWrite; 
+      <br>   public float writeSpeedOffset<br> }
     WriteSpeedOffset: 0
-  - TextToWrite: '   public void StartWriteText(TextPreset textPreset)    {      
-      if(writeTextCoroutine != null){return;}       writeTextCoroutine = Start'
+  - TextToWrite: '[CreateAssetMenu(fileName="TextPresetsToWrite",<br>menuName="CustomTools/Writer/TextPresetsToWrite",<br>
+      order = 1)] <br>public class'
     WriteSpeedOffset: 0

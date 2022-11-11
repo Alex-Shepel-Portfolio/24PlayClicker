@@ -6,7 +6,10 @@ using UnityEngine;
 public class SceneController : MonoSingleton<SceneController>
 {
     [SerializeField] private WorkTabelsController workTabelsController;
-    private LevelProgressController LevelProgress = LevelProgressController.Instance;
+    [SerializeField] private WorkerController workerController;
+    private LevelProgressController LevelProgress => LevelProgressController.Instance;
+    
+    public bool IsPreLastStage;
     
     private int currentLevel;
     
@@ -43,6 +46,7 @@ public class SceneController : MonoSingleton<SceneController>
         LevelProgress.OnUpdate += UpdatePointToNeed;
         EventManager.OnWorkDone.AddListener(GetProgress);
         OnPointsProgressChange += CheckWorkStatus;
+        workerController.Init();
         workTabelsController.Init();
     }
 
@@ -58,6 +62,7 @@ public class SceneController : MonoSingleton<SceneController>
     {
         PointsToNeedDone = LevelProgress.GetPointerPerStage();
         StartPointsToNeed = LevelProgress.GetPointerPerStage();
+        IsPreLastStage = levelProgress.CurrentStage == levelProgress.NumberStages - 1;
     }
 
     private void GetProgress(float progres)
