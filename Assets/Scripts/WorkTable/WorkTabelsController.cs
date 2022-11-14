@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class WorkTabelsController : ImprovedMonoBehaviour
@@ -17,5 +18,11 @@ public class WorkTabelsController : ImprovedMonoBehaviour
         {
             workTable.Init();
         }
+    }
+
+    [ContextMenu("FindAllWorkTables")]
+    public void FindAllWorkTables()
+    {
+        workTables = FindObjectsOfType<WorkTable>();
     }
 }

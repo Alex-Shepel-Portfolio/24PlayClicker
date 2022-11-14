@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class WorkerController : MonoSingleton<WorkerController>
@@ -13,5 +14,11 @@ public class WorkerController : MonoSingleton<WorkerController>
         {
             activeWorker.Init();
         }
+    }
+    
+    [ContextMenu("FindAllWorkers")]
+    public void FindAllWorkers()
+    {
+        activeWorkers = FindObjectsOfType<Worker>();
     }
 }

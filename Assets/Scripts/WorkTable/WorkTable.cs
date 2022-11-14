@@ -1,13 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using MoreMountains.Feedbacks;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WorkTable : ImprovedMonoBehaviour
 {
+    [SerializeField] private MouseClickDetection mouseClickDetection;
+    [SerializeField] private MMFeedbacks onClickFeedbacks;
+    [SerializeField] private WorkTableUI workTableUI;
+    [Space(5)]
     [SerializeField] private TimeScaleController timeScaleController;
     [SerializeField] private ComputerController computerController;
     [SerializeField] private Worker worker;
+    [Space(5)] [SerializeField] private Transform cameraPosition;
+    [SerializeField] private Transform workerSeatPosition;
+    [SerializeField] private float workerSeatDuration;
+    public Transform CameraPosition => cameraPosition;
+    
     private bool isHasWorker;
 
     public bool IsHasWorker
@@ -38,29 +50,91 @@ public class WorkTable : ImprovedMonoBehaviour
     
     public void Init()
     {
+        Subscribe();
         timeScaleController.Init();
         computerController.Init();
         computerController.OnWorkDone += SendProgress;
         OnWorkerStateChange += SendWorkerStatus;
         OnPlayerLook += SendPlayerLookStatus;
-        timeScaleController.OnTimeScaleChanged += OnStartWorkFaster;
-        timeScaleController.OnRateOverTimeChanged += OnRateChange;
         computerController.SetWorker(worker);
-        timeScaleController.SetParameters(worker.GetWorkerDamage());
+    }
+
+    private void Subscribe()
+    {
+        EventManager.OnPlayModeChange.AddListener(OnPlayModeChange);
+        mouseClickDetection.OnMouseClick += OnClicked;
+        mouseClickDetection.OnMouseDoubleClick += ActivePersonMode;
+       // mouseClickDetection.OnMouseHold += ActiveUIPanel;
+        mouseClickDetection.OnMouseDragAtObject += OnHoldMovePerson;
+    }
+
+    private void OnHoldMovePerson()
+    {
+        if (worker == null)
+        {
+            return;
+        }
+
+        IsHasWorker = false;
+        SceneController.Instance.SendStartDragWorker(worker);
+    }
+
+
+    private void ActivePersonMode()
+    {
+        if(!IsHasWorker){return;}
+        EventManager.SendOnPlayModeChange(this, true);
+    }
+    private void OnPlayModeChange(WorkTable workTable, bool isActivePerson)
+    {
+        mouseClickDetection.SetActive(!isActivePerson);
+        if(!this.Equals(workTable)){return;}
+        IsPlayerLook = isActivePerson;
+    }
+    
+    private void ActiveUIPanel()
+    {
+        workTableUI.Show();
+    }
+    
+    private void OnClicked()
+    {
+        if(IsPlayerLook){return;}
+        onClickFeedbacks?.PlayFeedbacks();
     }
 
     private void SendWorkerStatus(bool isHasWorker)
     {
-        computerController.IsHasWorker(isHasWorker);
+        computerController.SetWorker(worker);
     }
     private void SendPlayerLookStatus(bool isLook)
     {
         computerController.IsPlayerLook(isLook);
+        if (isLook)
+        {
+            timeScaleController.OnTimeScaleChanged += OnStartWorkFaster;
+            timeScaleController.OnRateOverTimeChanged += OnRateChange;
+            timeScaleController.Active();
+        }
+        else
+        {
+            timeScaleController.OnTimeScaleChanged -= OnStartWorkFaster;
+            timeScaleController.OnRateOverTimeChanged -= OnRateChange;
+            timeScaleController.Inactive();
+        }
     }
 
     public void SetWorker(Worker worker)
     {
-        this.worker = worker;
+        SceneController.Instance.SendStopDragWorker();
+        timeScaleController.SetParameters(worker.GetWorkerDamage());
+        worker.transform.SetParent(workerSeatPosition);
+        worker.transform.DOLocalMove(Vector3.zero, workerSeatDuration).OnComplete(() =>
+        {
+            this.worker = worker;
+            IsHasWorker = true;
+        });
+        
     }
     
     private void SendProgress()

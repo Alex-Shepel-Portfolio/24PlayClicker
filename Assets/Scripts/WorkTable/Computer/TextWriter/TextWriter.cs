@@ -27,6 +27,7 @@ public class TextWriter : ImprovedMonoBehaviour
 
 
    private Coroutine writeTextCoroutine;
+   private Coroutine workCoroutine;
    private TweenerCore<string, string, StringOptions> textWriterTween;
 
    private TextPreset currentWritePreset;
@@ -42,17 +43,43 @@ public class TextWriter : ImprovedMonoBehaviour
       textWriterTween.timeScale = writeSpeed;
    }
    
-   public void StartWriteText(float workerSpeedWrite,bool isNeedSendBuild)
+   public void StartWriteText(float workerSpeedWrite,bool isNeedSendBuild, bool isPlayerLook)
    {
       if(writeTextCoroutine != null){return;}
       var textPreset = GetTextPreset();
+      if (!isPlayerLook)
+      {
+         StartWorkWithoutAnimation(textPreset);
+         return;
+      }
+
+      StopWorkWithoutAnimation();
       writeTextCoroutine = StartCoroutine(WriteTextCoroutine(currentWriteText, textPreset, workerSpeedWrite, isNeedSendBuild));
    }
    public void StopWriteText()
    {
+      StopWorkWithoutAnimation();
       if(writeTextCoroutine == null){return;}
     StopCoroutine(writeTextCoroutine);
     writeTextCoroutine = null;
+   }
+
+   private void StartWorkWithoutAnimation(TextPreset textPreset)
+   {
+      workCoroutine = StartCoroutine(WorkWithoutAnimation(textPreset));
+   }
+
+   private void StopWorkWithoutAnimation()
+   {
+      if(workCoroutine==null){return;}
+      StopCoroutine(workCoroutine);
+   }
+
+   private IEnumerator WorkWithoutAnimation(TextPreset textPreset)
+   {
+      duration = Mathf.Clamp(textPreset.TextToWrite.Length / workerSpeedWrite, 0.1f, 10000);
+      yield return new WaitForSeconds(duration);
+      ResetText();
    }
 
 

@@ -4,19 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class InputStationBehavior : ImprovedMonoBehaviour, IStationstateSwitcher
+public class InputStationBehavior : MonoSingleton<InputStationBehavior>, IStationstateSwitcher
 {
     //[SerializeField, Range(-0.1f,0.5f)] private float updateStep = -0.1f;
     private List<InputState> allSate;
     private InputState currentState;
 
     private Coroutine updateCorutine;
-
-    private void Start()
-    {
-        Init(InputStateType.ClickerState);
-    }
-
+    
     public void Init(InputStateType stateForStart)
     {
         InitStates(stateForStart);
@@ -32,6 +27,7 @@ public class InputStationBehavior : ImprovedMonoBehaviour, IStationstateSwitcher
         };
         currentState = GetStateWithType(stateForStart);
         currentState.Start();
+        StartUpdate();
     }
 
     private InputState GetStateWithType(InputStateType stateForStart)
@@ -51,6 +47,11 @@ public class InputStationBehavior : ImprovedMonoBehaviour, IStationstateSwitcher
         }
 
         return stateToSet;
+    }
+
+    public void SwitchState(InputStateType stateType)
+    {
+        currentState.GetOtherState(stateType);
     }
 
     private void StartUpdate()

@@ -47,6 +47,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   workerStartParameters: {fileID: 11400000, guid: 3e50b9d84667f6442917a9e871d5e411,
     type: 2}
+  workerAnimator: {fileID: 0}
+  workTableLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  workZoneLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &7500304065939532266
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class MenuUI : MonoSingleton<MenuUI>
     [SerializeField] private WinUI winUI;
     [SerializeField] private LoseUI loseUI;
     [SerializeField] private LevelUI levelUI;
+    [SerializeField] private Button exitPersonModeButton;
     [SerializeField] private CoinsUI coinsUI;
     [SerializeField] private LevelProgressBar levelProgressBar;
     public LevelProgressBar LevelProgressBar => levelProgressBar;
@@ -16,6 +17,14 @@ public class MenuUI : MonoSingleton<MenuUI>
     private void Start()
     {
         GameC.Instance.OnInitCompleted += Init;
+        exitPersonModeButton.onClick.AddListener(ExitPersonMode);
+        exitPersonModeButton.SetInactive();
+    }
+
+    private void ExitPersonMode()
+    {
+        exitPersonModeButton.SetInactive();
+        SceneController.Instance.ExitPersonMode();
     }
 
     private void Init()
@@ -33,5 +42,10 @@ public class MenuUI : MonoSingleton<MenuUI>
         {
             loseUI.Show();
         }
+    }
+
+    public void ActiveExitPersonModeButton()
+    {
+        exitPersonModeButton.SetActive();
     }
 }

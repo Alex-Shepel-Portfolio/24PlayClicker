@@ -15,4 +15,13 @@ public class WorkerAnimator : ImprovedMonoBehaviour
         var workSpeedToSet = Mathf.Clamp(timeWork, minAnimSpeed, maxAnimSpeed);
         workerAnimator.speed = workSpeedToSet;
     }
+
+    public void SetIsDrugAnimation()
+    {
+        workerAnimator.SetBool("IsDrag", true);
+    }
+    public void SetIsWorkingAnimation()
+    {
+        workerAnimator.SetBool("IsDrag", false);
+    }
 }

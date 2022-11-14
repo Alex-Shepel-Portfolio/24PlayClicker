@@ -28,7 +28,13 @@ public class ComputerController : ImprovedMonoBehaviour
     }
     public void IsPlayerLook(bool isLook)
     {
+        var oldValue = isPlayerLook;
         isPlayerLook = isLook;
+        if (!oldValue.Equals(isLook))
+        {
+            StopWork();
+            StartDefaultWork();
+        }
     }
     public void SetRate(float totalMin, float totalMax,float min, float max,float currentValue)
     {
@@ -76,7 +82,7 @@ public class ComputerController : ImprovedMonoBehaviour
     
     private void StartWork(bool isLastWork)
     {
-        textWriter.StartWriteText(worker.GetWorkerWriteSpeed(),isLastWork);
+        textWriter.StartWriteText(worker.GetWorkerWriteSpeed(),isLastWork, isPlayerLook);
     }
     
     private void StopWork()

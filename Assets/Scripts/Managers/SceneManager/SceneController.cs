@@ -5,9 +5,14 @@ using UnityEngine;
 
 public class SceneController : MonoSingleton<SceneController>
 {
+   
     [SerializeField] private WorkTabelsController workTabelsController;
     [SerializeField] private WorkerController workerController;
     private LevelProgressController LevelProgress => LevelProgressController.Instance;
+    private CameraController cameraController;
+    private InputStationBehavior inputStationBehavior => InputStationBehavior.Instance;
+
+    private WorkTable personModeTable;
     
     public bool IsPreLastStage;
     
@@ -43,8 +48,12 @@ public class SceneController : MonoSingleton<SceneController>
     }
     private void OnLevelLoad(int _)
     {
+        inputStationBehavior.Init(InputStateType.SwipeMoveState);
+        cameraController = CameraController.Instance;
+        cameraController.Init();
         LevelProgress.OnUpdate += UpdatePointToNeed;
         EventManager.OnWorkDone.AddListener(GetProgress);
+        EventManager.OnPlayModeChange.AddListener(OnPlayModeChange);
         OnPointsProgressChange += CheckWorkStatus;
         workerController.Init();
         workTabelsController.Init();
@@ -76,6 +85,45 @@ public class SceneController : MonoSingleton<SceneController>
         LevelProgress.SendStageFinish();
     }
 
+    private void OnPlayModeChange(WorkTable workTable, bool isPersonMode)
+    {
+        personModeTable = workTable;
+        if (isPersonMode)
+        {
+            ActivePersonMode(workTable.CameraPosition);
+        }
+        else
+        {
+            ActiveGlobalMode();
+        }
+    }
 
-    
+
+    public void ActivePersonMode(Transform cameraPosition)
+    {
+        cameraController.MovePersonCamera(cameraPosition);
+        cameraController.PersonLookCamera();
+        inputStationBehavior.SwitchState(InputStateType.ClickerState);
+        MenuUI.Instance.ActiveExitPersonModeButton();
+    }
+    public void ActiveGlobalMode()
+    {
+        cameraController.GlobalLookCamera();
+        inputStationBehavior.SwitchState(InputStateType.SwipeMoveState);
+    }
+
+    public void ExitPersonMode()
+    {
+        EventManager.SendOnPlayModeChange(personModeTable, false);
+    }
+
+    public void SendStartDragWorker(Worker worker)
+    {
+        inputStationBehavior.SwitchState(InputStateType.MinZoneMoveState);
+        worker.StartMoveWithDrag();
+    }
+    public void SendStopDragWorker()
+    {
+        inputStationBehavior.SwitchState(InputStateType.SwipeMoveState);
+    }
 }

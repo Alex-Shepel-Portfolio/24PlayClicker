@@ -46,7 +46,16 @@ public class TimeScaleController : ImprovedMonoBehaviour
         cooldownCounter = 0;
         emission = speedLines.emission;
         SetParticles();
+    }
+
+    public void Active()
+    {
         EventManager.InputEvent.OnClick.AddListener(OnTap);
+    }
+
+    public void Inactive()
+    {
+        EventManager.InputEvent.OnClick.RemoveListener(OnTap);
     }
 
     private void OnTap()

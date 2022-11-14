@@ -886,6 +886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d064caee45fa1ea4380b12f3d185c301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputStationBehavior: {fileID: 0}
   workTabelsController: {fileID: 1822931797}
   workerController: {fileID: 1822931799}
   IsPreLastStage: 0
