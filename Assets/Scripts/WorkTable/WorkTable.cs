@@ -57,6 +57,8 @@ public class WorkTable : ImprovedMonoBehaviour
         OnWorkerStateChange += SendWorkerStatus;
         OnPlayerLook += SendPlayerLookStatus;
         computerController.SetWorker(worker);
+        IsHasWorker = worker != null;
+        IsPlayerLook = false;
     }
 
     private void Subscribe()
@@ -106,6 +108,10 @@ public class WorkTable : ImprovedMonoBehaviour
     private void SendWorkerStatus(bool isHasWorker)
     {
         computerController.SetWorker(worker);
+        if (isHasWorker)
+        {
+            timeScaleController.SetParameters(worker.GetWorkerDamage());
+        }
     }
     private void SendPlayerLookStatus(bool isLook)
     {
@@ -127,7 +133,7 @@ public class WorkTable : ImprovedMonoBehaviour
     public void SetWorker(Worker worker)
     {
         SceneController.Instance.SendStopDragWorker();
-        timeScaleController.SetParameters(worker.GetWorkerDamage());
+        
         worker.transform.SetParent(workerSeatPosition);
         worker.transform.DOLocalMove(Vector3.zero, workerSeatDuration).OnComplete(() =>
         {

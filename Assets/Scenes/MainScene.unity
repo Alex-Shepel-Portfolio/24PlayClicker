@@ -2202,6 +2202,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1819772464 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6545334488620736691, guid: cda7422b60d608045b8cc2420d15f24e,
+    type: 3}
+  m_PrefabInstance: {fileID: 650029847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dcb17e055346124ba2f7de7b70aa472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1840021779
 GameObject:
   m_ObjectHideFlags: 0
@@ -2987,6 +2999,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6387457072272467164, guid: 1f18eab663e591a43a88805757086232,
+        type: 3}
+      propertyPath: upgradeMenuUI
+      value: 
+      objectReference: {fileID: 1819772464}
     - target: {fileID: 6387457072272467164, guid: 1f18eab663e591a43a88805757086232,
         type: 3}
       propertyPath: writeSpeedPerLevel

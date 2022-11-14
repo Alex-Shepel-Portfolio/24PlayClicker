@@ -12,6 +12,7 @@ namespace TFPlay.UpgradeSystem
         [SerializeField] private AnimationCurve stressTolerancehProgressionCurve;
         [SerializeField] private float damageMultiplierPercent = 0.1f;
         [SerializeField] private AnimationCurve damageProgressionCurve;
+        [Space(5)] [SerializeField] private UpgradeMenuUI upgradeMenuUI;
 
         private Transform target;
 
@@ -19,6 +20,15 @@ namespace TFPlay.UpgradeSystem
 
         public event System.Action<Transform> OnTargetInitialized;
         public event System.Action<UpgradeType> OnUpgraded;
+
+        public void ActiveMenuUI()
+        {
+            upgradeMenuUI.Show();
+        }
+        public void InactiveMenuUI()
+        {
+            upgradeMenuUI.Hide();
+        }
 
         public void SetTarget(Transform target)
         {

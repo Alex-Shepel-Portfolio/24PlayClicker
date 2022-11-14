@@ -3023,7 +3023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1897525172}
   minZoom: 60
-  maxZoom: 20
+  maxZoom: 10
   zoomOffset: 0.1
 --- !u!1001 &1932874215
 PrefabInstance:

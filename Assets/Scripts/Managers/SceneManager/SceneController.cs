@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TFPlay.UpgradeSystem;
 using UnityEngine;
 
 public class SceneController : MonoSingleton<SceneController>
@@ -101,6 +102,7 @@ public class SceneController : MonoSingleton<SceneController>
 
     public void ActivePersonMode(Transform cameraPosition)
     {
+        UpgradeController.Instance.ActiveMenuUI();
         cameraController.MovePersonCamera(cameraPosition);
         cameraController.PersonLookCamera();
         inputStationBehavior.SwitchState(InputStateType.ClickerState);
@@ -108,6 +110,7 @@ public class SceneController : MonoSingleton<SceneController>
     }
     public void ActiveGlobalMode()
     {
+        UpgradeController.Instance.InactiveMenuUI();
         cameraController.GlobalLookCamera();
         inputStationBehavior.SwitchState(InputStateType.SwipeMoveState);
     }

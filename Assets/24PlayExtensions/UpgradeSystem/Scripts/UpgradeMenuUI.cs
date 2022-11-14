@@ -20,22 +20,22 @@ namespace TFPlay.UpgradeSystem
             GameC.Instance.OnLevelStartLoading += OnLevelStartLoading;
             GameC.Instance.OnLevelEnd += OnLevelEnd;
         }
-
+        
         private void OnLevelEnd(bool levelSuccess)
         {
             HideInstant();
         }
-
+        
         private void OnLevelStartLoading(int level)
         {
-            if (level >= showFromLevel)
-            {
-                Show();
-            }
-            else
-            {
+            // if (level >= showFromLevel)
+            // {
+            //     Show();
+            // }
+            // else
+            // {
                 HideInstant();
-            }
+            //}
         }
 
         private void UpgradeButtonUI_OnPurchased(UpgradeType upgradeType)
